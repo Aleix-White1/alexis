@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>Alexis </title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='/razer.png') }}">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" type='text/css' media='screen' href="{{ url_for('static', filename='BioComoSeUsa.css') }}">
+    <script type="text/javascript" src="script.js"></script>
+</head>
+
+<body>
+    <div class="menuHeader">
+        <ul>
+            <li><a href="{{url_for('Alexis')}}">Alexis</a></li>
+            <li><a href="{{url_for('BioAlexis')}}">BioAlexis</a></li>
+            <li><a href="{{url_for('BioComoSeUsa')}}">Como se usa?</a></li>
+        </ul>
+    </div>
+    <div class="titulo">
+        <h1>Como se usa?</h1>
+    </div>
+    <div id="texto">
+        <p>Para empezar a hablar con Alexis, hay que pulsar el botón de hablar. Cuando el micro este encendido 
+            y se pueda detectar podras empezar a hablar, sinó te avisara que hay algun problema.
+            Si quieres buscar una proteína por ID, di: Buscar proteína por Id ... Seguido de la ID.
+            Para buscar articulos relacionados con tu busqueda biomédica di: Buscar articulos sobre ... Seguido del tema.
+            Si quieres buscar informacion sobre una proteína di: Buscar información sobre ... Id de la proteina. 
+            Se abrira la pagina de rcsb con la ID deseada, pero al regresar a la pagina habrá un diccionario de palabras, 
+            relacionado con la busqueda de la proteína. Para recuperar un campo del diccionario di: Recuperar campo ... 
+            Seguido del nombre del campo en Español. Los campos mas usados y los que se puede recuperar información son:
+            Campo cell, audit_author, struct, software, rcsb_id, symmetry.
+            Si quieres buscar proteínas relacionado con algun compuesto, di: Buscar proteínas de ... Nombre del compuesto.
+        </p>
+
+    </div>
+
+
+
+
+</body>
+
+</html>
