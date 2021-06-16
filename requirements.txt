@@ -33,4 +33,3 @@ urllib3==1.26.5
 Werkzeug==2.0.1
 wikipedia==1.4.0
 wrapt==1.12.1
-pywin32;sys_platform == 'win32'
