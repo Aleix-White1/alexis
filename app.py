@@ -36,10 +36,10 @@ def data_get(index_no):
 def abrirPaginas(comando):
     try:
         if comando == "abre YouTube" or comando == "abrir Youtube" or comando == " abre YouTube" or comando == " abrir Youtube":
-            webbrowser.open_new_tab("https://www.youtube.com")
+            #webbrowser.open_new_tab("https://www.youtube.com")
             return "Abriendo Youtube..."
         elif comando == "abre Google" or comando == "abrir Google" or comando == " abre Google" or comando == " abrir Google" :
-            webbrowser.open_new_tab("https://www.google.com")
+            #webbrowser.open_new_tab("https://www.google.com")
             return "Abriendo Google..."
         elif comando == "abre WhatsApp" or comando == "abrir WhatsApp" or comando == " abre WhatsApp" or comando == " abrir WhatsApp":
             webbrowser.open_new_tab("https://web.whatsapp.com/")
