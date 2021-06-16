@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, render_template
 import json
 import random # libreria para operar con aleatorio
 import webbrowser #libreria para abrir paginas
+from selenium import webdriver
 
 app = Flask(__name__)
 
@@ -36,10 +37,14 @@ def data_get(index_no):
 def abrirPaginas(comando):
     try:
         if comando == "abre YouTube" or comando == "abrir Youtube" or comando == " abre YouTube" or comando == " abrir Youtube":
-            #webbrowser.open_new_tab("https://www.youtube.com")
+            webbrowser.open_new_tab("https://www.youtube.com")
             return "Abriendo Youtube..."
         elif comando == "abre Google" or comando == "abrir Google" or comando == " abre Google" or comando == " abrir Google" :
-            #webbrowser.open_new_tab("https://www.google.com")
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_argument("--headless")
+            chrome_options.add_argument("--disable-gpu")
+            browser = webdriver.Chrome(options=chrome_options)
+            browser.get("https://www.google.com")
             return "Abriendo Google..."
         elif comando == "abre WhatsApp" or comando == "abrir WhatsApp" or comando == " abre WhatsApp" or comando == " abrir WhatsApp":
             webbrowser.open_new_tab("https://web.whatsapp.com/")
