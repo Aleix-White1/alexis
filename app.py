@@ -123,41 +123,7 @@ def data_get(index_no):
         comando = str(index_no)
         return menuComandos(comando)
 
-def Traductor(source, target, comando):
-    parametros = {'sl': source, 'tl': target, 'q': comando}
-    cabeceras = {"Charset":"UTF-8","User-Agent":"AndroidTranslate/5.3.0.RC02.130475354-53000263 5.1 phone TRANSLATE_OPM5_TEST_1"}
-    url = "https://translate.google.com/translate_a/single?client=at&dt=t&dt=ld&dt=qca&dt=rm&dt=bd&dj=1&hl=es-ES&ie=UTF-8&oe=UTF-8&inputm=2&otf=2&iid=1dd3b944-fa62-4b55-b330-74909a99969e"
-    response = requests.post(url, data=parametros, headers=cabeceras)
-    if response.status_code == 200:
-        for x in response.json()['sentences']:
-            return x['trans']
-    else:
-        return "Ocurrió un error"
 
-def alarma(hora, minut):
-    while True:
-        if localtime().tm_hour == int(hora) and localtime().tm_min == int(minut):
-            mixer.init()
-            mixer.music.load("alarm-clock.mp3")
-            mixer.music.play()
-            break
-    return "ALARMAAA!!"
-
-def tiempo(comando):
-    owm = pyowm.OWM("012391b16eee62f600c190ed3ac9bf09")
-    casa = "Barcelona, Montcada i Reixach"
-    mgr = owm.weather_manager()
-    observation = mgr.weather_at_place(casa)
-    w = observation.weather
-    temp = w.temperature('celsius')
-    status = w.detailed_status
-    respuesta_traducida = Traductor("en", "es", status)
-   
-    if "ahora" in comando or "hoy" in comando:
-        return ("Ahora hace " + str(int(temp['temp'])) + " grados y " + respuesta_traducida.lower())
-
-    else:	
-        return "No se reconoce comando de tiempo"
 
 def abrirPaginas(comando):
     try:
@@ -260,56 +226,18 @@ def calculadora(comando):
     else: 
         return "No estoy programado para hacer esto aún..."
 
-def Historial(comando):
-    f = open("historial.txt", "a")
-    f.write(comando + ", ")
-    f.close()
-
-def borrarHistorial():
-    if path.exists("D:\DAW2\PROJECTE\MPro\serving_static\historial.txt"):
-        remove("D:\DAW2\PROJECTE\MPro\serving_static\historial.txt")
-        return "El historial se ha borrado.."
-    else:
-        pass
-
-def leerHistorial():
-    p = open("historial.txt", 'r')
-    mensaje = p.read()
-    return "Comandos usados: " + mensaje
-    
-def dibujaEspiral():
-    sc=turtle.Screen()
-    sc.setup(800,800)
-    spiral = turtle.Turtle()
-    spiral.speed(9)
-    sc.bgcolor("black")
-    col =["yellow", "blue", "white", "green"]
-    c = 0
-    for i in range(50):
-        spiral.forward(i*10)
-        spiral.right(144)
-        spiral.color(col[c])
-        if c==3:
-            c=0
-        else:
-            c+=1
-    return "Dibujo terminado..."
-
 def menuComandos(comando):
     if comando == "hola" or comando ==  " hola":
         saludos = ["Hola!", "Saludos!", "Buenas...", "Hola, me alegra oirte"]
         random_saludos = random.choice(saludos)
-        Historial(comando)
         return random_saludos
     elif comando == "gracias":
         return "De nada :)"
     elif comando == " cómo estás" or comando == "cómo estás" or comando =="qué tal" or comando == " qué tal":
         estado = ["Estoy bien, gracias", "Podria estar mejor...", "Un poco cansado de tantas preguntas", "Muy bien!", "Listo para que me preguntes cualquier cosa"]
         random_estado = random.choice(estado)
-        Historial(comando)
         return random_estado
     elif "quién eres" in comando:
-        Historial(comando)
         return "Soy Alexis, un proyecto de DAW"
     elif "chiste" in comando:
         chistes = ["¿Cómo se llama el campeón de buceo japonés? \n Tokofondo. \n ¿Y el subcampeón? \n Kasitoko.", "- ¡Soldado López! \n ¡Sí, mi capitán! \n No lo vi ayer en la prueba de camuflaje \n ¡Gracias, mi capitán!",
@@ -317,31 +245,23 @@ def menuComandos(comando):
         "Si car es carro y men es hombre entonces Carmen es un transformer...", "Soy un tipo saludable \n Ah. ¿Comes sano y todo eso? \n No, la gente me saluda...", "¿Cómo se despiden los químicos? \n Ácido un placer...",
         "¿Cómo se dice escoba voladora en japonés? \n Simekaigo Memato.", "Como maldice un pollito a otro pollito? \n ¡Caldito seas!", " Mamá, mamá, el abuelo se cayó \n ¿Lo ayudaste hijo? \n No, se cayó solo."]
         random_chistes = random.choice(chistes)
-        Historial(comando)
         return random_chistes
     elif "malo" in comando:
         return "Perdón, no soy tan bueno como tú.."
     elif "menú" in comando or "que sabes hacer" in comando or "qué haces" in comando or "qué puedes hacer" in comando:
-        Historial(comando)
         return "Para saber lo que puedo hacer, selecciona la pestaña superior 'Como se Usa?' "
     elif "abre" in comando or "abrir" in comando:
-        Historial(comando)
         return abrirPaginas(comando)
     elif "busca en Wikipedia" in comando or "buscar en Wikipedia" in comando:
-        Historial(comando)
         return wikipediaBuscar(comando)
     elif "busca en Google" in comando or "buscar en Google" in comando or "pon la canción" in comando: 
-        Historial(comando)
         return buscarComando(comando)
     elif "suma" in comando or " + " in comando or "menos" in comando or "resta" in comando or "divide" in comando or "entre" in comando or "multiplica" in comando or "por" in comando:
-        Historial(comando)
         return calculadora(comando) 
     elif "tiempo" in comando:
-        Historial(comando)
         return tiempo(comando)
     elif "traduce del español" in comando:   
         try:
-            Historial(comando)
             comando_cc = str(comando[20::])
             respuesta_traducida = Traductor("es", "en", comando_cc)
             return respuesta_traducida
@@ -349,7 +269,6 @@ def menuComandos(comando):
             return "Que quiere que traduzca?"
     elif "traduce del inglés" in comando:
         try:
-            Historial(comando)
             comando_cc = str(comando[19::])
             respuesta_traducida = Traductor("en", "es", comando_cc)
             return respuesta_traducida
