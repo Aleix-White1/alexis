@@ -13,7 +13,7 @@ function processInPython() {
     function iniciar(event) {
         for (let i = event.resultIndex; i < event.results.length; i++) {
             index = event.results[i][0].transcript;
-            alert(index);
+            //alert(index);
             fetch(`/getdata/${index}`,{
                 method: 'POST'
             })
