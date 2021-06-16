@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, render_template
 import json
-import random
+import random # libreria para operar con aleatorio
+import webbrowser #libreria para abrir paginas
 
 app = Flask(__name__)
 
@@ -32,6 +33,25 @@ def data_get(index_no):
         comando = str(index_no)
         return menuComandos(comando)
 
+def abrirPaginas(comando):
+    try:
+        if comando == "abre YouTube" or comando == "abrir Youtube" or comando == " abre YouTube" or comando == " abrir Youtube":
+            webbrowser.open_new_tab("https://www.youtube.com")
+            return "Abriendo Youtube..."
+        elif comando == "abre Google" or comando == "abrir Google" or comando == " abre Google" or comando == " abrir Google" :
+            webbrowser.open_new_tab("https://www.google.com")
+            return "Abriendo Google..."
+        elif comando == "abre WhatsApp" or comando == "abrir WhatsApp" or comando == " abre WhatsApp" or comando == " abrir WhatsApp":
+            webbrowser.open_new_tab("https://web.whatsapp.com/")
+            return "Abriendo WhatsApp..."
+        elif "abre explorador de archivos" in comando or "abrir explorador de archivos" in comando :
+            os.startfile("C:/Users/Aleix")
+            return "Abriendo explorador de archivos"
+        else: 
+            return "No estoy programado para hacer esto aún..."
+    except TypeError:
+        return ("Tienes un error tipografico, cuidado")
+
 def menuComandos(comando):
     if comando == "hola" or comando ==  " hola":
         saludos = ["Hola!", "Saludos!", "Buenas...", "Hola, me alegra oirte"]
@@ -52,6 +72,8 @@ def menuComandos(comando):
         "¿Cómo se dice escoba voladora en japonés? \n Simekaigo Memato.", "Como maldice un pollito a otro pollito? \n ¡Caldito seas!", " Mamá, mamá, el abuelo se cayó \n ¿Lo ayudaste hijo? \n No, se cayó solo."]
         random_chistes = random.choice(chistes)
         return random_chistes
+    elif "abre" in comando or "abrir" in comando:
+        return abrirPaginas(comando)
     else:
         return "No estoy programado para hacer esto aún..."
 
