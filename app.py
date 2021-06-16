@@ -1,25 +1,5 @@
 from flask import Flask, jsonify, request, render_template
 import json
-import pyttsx3 #para poder hablar (en principio no se va a usar )
-import webbrowser #libreria para abrir o buscar paginas 
-from datetime import date, timedelta, datetime #mide el tiempo
-import pyowm  # tiempo por localidad 
-import operator  # matematicas
-import random  #oeprador aleatorio
-import os  #Interactuar con el directorio del pc 
-from os import remove #borrar contenido de un fichero
-from os import path
-from re import split #dividir arrays
-import wikipedia # libreria para conectar con wikipedia
-import requests #libreria que se usa para el traductor 
-import turtle #dibujar
-#alarma
-from time import localtime
-from pygame import mixer
-#radio
-import internetradioplayer
-#librerias parteBio
-from pypdb import *
 
 app = Flask(__name__)
 
